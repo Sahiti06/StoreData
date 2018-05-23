@@ -6,6 +6,30 @@
 </head>
 <body>
 <h1><%= title %></h1>
-<p><%= value_name %></p>
+<table class="table table-inverse">
+    <thead>
+    <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <% for(var i=0; i < orderlist.length; i++) { %>
+    <tr>
+
+        <td><%= orderlist[i].productid %></td>
+        <td><%= orderlist[i].productname %></td>
+        <td><%= orderlist[i].quantity %></td>
+        <td><%= orderlist[i].price %></td>
+
+    </tr>
+    <% } %>
+    </tbody>
+
+</table>
 </body>
 </html>
