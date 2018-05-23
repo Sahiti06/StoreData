@@ -11,13 +11,7 @@ router.get('/', function(req, res) {
 
 router.post('/storeData', function(req, res) {
     var order_value = req.body.order;
-    // var shipping_value = req.body.shipping;
-    // var billing_value = req.body.billing;
-    // var customer_value = req.body.customer;
-    res.send("Order:" + order_value);
-    // res.send("Shipping info:" + shipping_value);
-    // res.send("Billing info:" + billing_value);
-    // res.send("Customer info:" + customer_value);
+    res.send("Order:" + JSON.stringify(order_value));
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
