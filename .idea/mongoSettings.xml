@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="authenticationDatabase" value="heroku_w1zxv8n0" />
+          <option name="authenticationMechanism" value="SCRAM-SHA-1" />
+          <option name="connectOnIdeStartup" value="true" />
+          <option name="label" value="MongoDB" />
+          <option name="password" value="test123" />
+          <option name="serverUrls">
+            <list>
+              <option value="ds225010.mlab.com:25010" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="heroku_w1zxv8n0" />
+          <option name="username" value="sahiti" />
+        </ServerConfiguration>
+      </list>
+    </option>
+    <option name="shellPath" value="$USER_HOME$/mongodb-osx-x86_64-3.6.5/bin/mongod" />
+  </component>
+</project>
