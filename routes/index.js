@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 router.post('/storeData', function(req, res) {
     var value_name = req.body.order;
     res.send("Order successfully received" + value_name);
-    res.render('storeData', { value : value_name });
+    // res.render('storeData', { value : value_name });
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
