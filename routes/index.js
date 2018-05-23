@@ -11,16 +11,15 @@ router.get('/', function(req, res, next) {
 
 router.post('/storeData', function(req, res, next) {
     var value_name = req.body.order;
-    // res.send("Order successfully received" + value_name);
-    // res.render('storeData', {'order' : value_name} );
-    const server = http.createServer((req,res)=>{
-        res.setHeader('Content-Type', 'text/html');
-        res.setHeader('X-Foo', 'bar');
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('');
-      }).listen(port,()=>{
-        console.log('your app is started');
-    });
+    console.log(value_name);
+    var obj = JSON.stringify(value_name);
+        // res.setHeader('Content-Type', 'text/html');
+        // res.setHeader('X-Foo', 'bar');
+        // res.writeHead(200, { 'Content-Type': 'text/plain' });
+        // res.end('');
+    res.send("Order successfully received" + obj);
+    res.render('storeData', {'order' : obj} );
+
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
