@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/storeData, function(req, res, next) {
+router.post('/storeData', function(req, res, next) {
 var value_name = req.body.order;
 res.send("Order succesfully received: " + value_name);
 });
