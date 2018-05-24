@@ -11,7 +11,8 @@ router.get('/', function(req, res) {
 
 router.post('/storeData', function(req, res) {
     var finalOrder = req.body.order;
-    res.render('/storeData', { title: 'Getting Orders Collection' }, {displayResults : finalOrder});
+    res.send("From POST call: " + finalOrder);
+    res.render('storeData', { title: 'Final Order Details' });
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);

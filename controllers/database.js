@@ -58,54 +58,40 @@ module.exports.getAllOrders =  function (request, response) {
 
 module.exports.storeData = function (request, response) {
 
-//
-//     mongodb.MongoClient.connect('mongodb://sahiti:test123@ds225010.mlab.com:25010/heroku_w1zxv8n0', function(err, db) {
-//         if(err) throw err;
-//
-//         var dbo = db.db('heroku_jw552rkk');
-//         var myobj =
-//             { _id: getRandomArbitrary(10000, 20000),
-//                 FIRSTNAME: firstname, LASTNAME: lastname,
-//                 STREET: street, CITY: city, STATE: bstate,
-//                 ZIP: zip, EMAIL: email};
-//
-//         dbo.collection("CUSTOMERS").insertOne(myobj, function(err, res) {
-//             if (err) throw err; });
-//
-//         var dbi = db.db('heroku_jw552rkk');
-//         var myobj1 =
-//             {_id: getRandomArbitrary(20001, 30000),
-//                 CUSTOMER_ID: myobj._id, CREDITCARDTYPE: cardtype,
-//                 CREDITCARDNUM: cardnumber, CREDITCARDEXP: cardexp,
-//                 CREDITCARDSECURITYNUM: cardcvv};
-//         dbi.collection("BILLING").insertOne(myobj1, function(err, res) {
-//             if (err) throw err; });
-//
-//         var dba = db.db('heroku_jw552rkk');
-//         var myobj2 =
-//             {_id: getRandomArbitrary(30001, 40000),
-//                 CUSTOMER_ID: myobj._id, SHIPPING_STREET: shipstreet,
-//                 SHIPPING_CITY: shipcity, SHIPPING_STATE: shipstate,
-//                 SHIPPING_ZIP: shipzip
-//             };
-//
-//         dbo.collection("SHIPPING").insertOne(myobj2, function(err, res)
-//         { if (err) throw err; });
-//
-//         var d = new Date(jsonDate);
-//         var dbc = db.db('heroku_jw552rkk');
-//         var myobj3 =
-//             {_id: getRandomArbitrary(40001, 50000),
-//                 CUSTOMER_ID: myobj._id, BILLING_ID: myobj1._id,
-//                 SHIPPING_ID: myobj2._id, DATE: d,
-//                 PRODUCT_VECTOR: order, ORDER_TOTAL: total};
-//         dbc.collection("ORDERS").insertOne(myObj3, function(err, res)
-//         { if (err) throw err; });
-//
-//         var dbk = db.db('heroku_jw552rkk');
-//         dbk.collection("ORDERS").find({}).toArray(function(err, result) {
-//             if (err) throw err;
-//             console.log("THANK YOU FOR YOUR SUBMITTED ORDER");
-//             db.close(); }; //end of connect
-//     }; //end function
+    // mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
+    //     if(err) throw err;
+    //
+    //     //get handle to the databse
+    //     var theDatabase = client.db('heroku_w1zxv8n0');
+    //
+    //     //get collection of Orders
+    //     var Customers = db.collection('CUSTOMERS');
+    //
+    //     var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+    //     var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+    //     var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+
+        // var customerdata = {
+        //     _id: customerID,
+        //     ORDER: finalOrder;
+        //     // FIRSTNAME: shipment_info['fname'],
+        //     // LASTNAME: shipment_info['lname'],
+        //     // STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
+        //     // CITY: shipment_info['city'],
+        //     // STATE: shipment_info['state'],
+        //     // ZIP: shipment_info['zipcode'],
+        //     // PHONE: shipment_info['phone']
+        // };
+
+        // Customers.find().toArray(function (err, docs) {
+        //     if(err) throw err;
+        //
+        //     response.render('storeData', {results: docs});
+        //
+        // });
+        //
+        // CUSTOMERS.insertOne(customerdata, function (err, result) {
+        //     if (err) throw err;
+        // })
+    // });
 };
