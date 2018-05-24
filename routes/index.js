@@ -12,7 +12,8 @@ router.get('/', function(req, res) {
 router.post('/storeData', function(req, res) {
     var finalOrder = req.body.order;
     res.format({'application/json': function() {
-            res.render('storeData', {DisplayOrder : finalOrder});
+            res.render('/getAllOrders', controllerMongoCollection.storeData);
+            res.send(finalOrder);
         },
     });
 });
