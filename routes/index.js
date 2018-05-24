@@ -16,9 +16,9 @@ res.send("Order succesfully received: " + value_name);
 
 router.get('/storeData', function(req, res) {
     var finalOrder = req.body.order;
-    res.render('storeData', { title: 'Results from ORDERS Collection'}, {finalOrder : JSON.stringify(finalOrder)});
+    res.render('storeData', { title: 'Results from ORDERS Collection'}, {finalOrder : JSON.stringify(finalOrder)}, { useNewUrlParser: true });
 });
 
-router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
+router.get('/getAllOrders', controllerMongoCollection.getAllOrders, { useNewUrlParser: true });
 
 module.exports = router;
