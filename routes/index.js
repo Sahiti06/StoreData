@@ -9,14 +9,15 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/storeData', function(req, res) {
-var value_name = req.body.order;
-res.send("Order succesfully received: " + value_name);
-});
+// router.post('/storeData', function(req, res) {
+// var value_name = req.body.order;
+// res.send("Order succesfully received: " + value_name);
+// });
 
 router.get('/storeData', function(req, res) {
     var finalOrder = req.body.order;
-    res.render('storeData', { title: 'Getting Orders Collection' }, {finalOrder : finalOrder});
+    // res.render('storeData', { title: 'Getting Orders Collection' }, {finalOrder : finalOrder});
+    res.send("Order succesfully received: " + finalOrder);
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
