@@ -10,8 +10,8 @@ router.get('/', function(req, res) {
 });
 
 router.post('/storeData', function(req, res) {
-    var order_value = req.body.order;
-    res.send("Order:" + JSON.stringify(order_value));
+    var finalOrder = req.body.order;
+    res.render('storeData', { finalOrder: JSON.stringify(finalOrder)});
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
