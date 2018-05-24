@@ -3,6 +3,9 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+        var finalOrder = req.body.order;
+    </script>
 </head>
 <body>
 <h1><%= title %></h1>
@@ -13,9 +16,7 @@
     <% for(var i=0; i < finalOrder.length; i++) { %>
     <tr>
 
-        <td><%= finalOrder[i].address1 %></td>
-        <td><%= finalOrder[i].cardnumber %></td>
-        <td><%= finalOrder[i].firstname %></td>
+        <td><%= finalOrder[i]%></td>
 
     </tr>
     <% } %>
