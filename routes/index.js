@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/storeData', function(req, res, next) {
+router.post('/storeData', function(req, res) {
 var value_name = req.body.order;
 res.send("Order succesfully received: " + value_name);
 });
@@ -17,7 +17,7 @@ res.send("Order succesfully received: " + value_name);
 router.get('/storeData', function(req, res) {
     var finalOrder = req.body.order;
     res.render('storeData', { title: 'Results from ORDERS Collection'});
-    res.render(finalOrder);
+    res.send(finalOrder);
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
