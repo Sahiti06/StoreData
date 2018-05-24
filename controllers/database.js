@@ -1,6 +1,8 @@
 var mongodb = require('mongodb');
 var mongoDBURI = process.env.MONGODB_URI || 'mongodb://sahiti:test123@ds225010.mlab.com:25010/heroku_w1zxv8n0';
 
+// var myModule = require('./modules');
+
 var bodyParser = require('body-parser');
 var path = require ('path'); //to work with separtors on any OS including Windows
 var querystring = require('querystring'); //for use in GET Query string of form URI/path?name=value
@@ -58,40 +60,93 @@ module.exports.getAllOrders =  function (request, response) {
 
 module.exports.storeData = function (request, response) {
 
-    // mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
-    //     if(err) throw err;
-    //
-    //     //get handle to the databse
-    //     var theDatabase = client.db('heroku_w1zxv8n0');
-    //
-    //     //get collection of Orders
-    //     var Customers = db.collection('CUSTOMERS');
-    //
-    //     var customerID = Math.floor((Math.random() * 1000000000000) + 1);
-    //     var billingID = Math.floor((Math.random() * 1000000000000) + 1);
-    //     var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+    const { parse } = require('querystring');
+    if (request.method === 'POST') {
+        var finalOrder = request.body.order;
+        response.send(finalOrder);
+    }
 
-        // var customerdata = {
-        //     _id: customerID,
-        //     ORDER: finalOrder;
-        //     // FIRSTNAME: shipment_info['fname'],
-        //     // LASTNAME: shipment_info['lname'],
-        //     // STREET: shipment_info['add1'] + ' ' + shipment_info['add2'],
-        //     // CITY: shipment_info['city'],
-        //     // STATE: shipment_info['state'],
-        //     // ZIP: shipment_info['zipcode'],
-        //     // PHONE: shipment_info['phone']
-        // };
+     var print = JSON.parse(finalOrder);
+     console.log(print);
 
-        // Customers.find().toArray(function (err, docs) {
-        //     if(err) throw err;
-        //
-        //     response.render('storeData', {results: docs});
-        //
-        // });
-        //
-        // CUSTOMERS.insertOne(customerdata, function (err, result) {
-        //     if (err) throw err;
-        // })
-    // });
+    mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
+        if(err) throw err;
+
+        //get handle to the databse
+        var theDatabase = client.db('heroku_w1zxv8n0');
+
+        //get collection of Orders
+        var Customers = theDatabase.collection('CUSTOMERS');
+        var Billing = theDatabase.collection('BILLING');
+        var Shipping = theDatabase.collection('SHIPPING');
+        var Orders = theDatabase.collection('ORDERS');
+
+        var customerID = Math.floor((Math.random() * 1000000000000) + 1);
+        var billingID = Math.floor((Math.random() * 1000000000000) + 1);
+        var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
+
+        var customerdata = {
+            CID: customerID,
+            FIRSTNAME: JSON.parse(finalOrder).firstname,
+            LASTNAME: JSON.parse(finalOrder).lastname,
+            STREET: JSON.parse(finalOrder).address1 + ' ' + JSON.parse(finalOrder).address2,
+            CITY: JSON.parse(finalOrder).city,
+            STATE: JSON.parse(finalOrder).state,
+            EMAIL: JSON.parse(finalOrder).email
+         };
+
+        var shippingdata = {
+            SID: shippingID,
+            STREET: JSON.parse(finalOrder).address1 + ' ' + JSON.parse(finalOrder).address2,
+            CITY: JSON.parse(finalOrder).city,
+            STATE: JSON.parse(finalOrder).state
+        };
+
+        var billingdata = {
+            BID: billingID,
+            CREDITCARDTYPE: JSON.parse(finalOrder).cardtype,
+            CREDITCARDNUM: JSON.parse(finalOrder).cardnumber,
+            CREDITCARDEXP: JSON.parse(finalOrder).cardexpmonth,
+            CREDITCARDYR: JSON.parse(finalOrder).cardexpyear,
+            CREDITCARDSECURITYNUM: JSON.parse(finalOrder).cardcvv
+        };
+
+        var orders = {
+               PRODUCT_VECTOR: JSON.parse(finalOrder)['productdetails']
+        };
+
+        Customers.insertOne(customerdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Billing.insertOne(billingdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Shipping.insertOne(shippingdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Orders.insertOne(orders, function (err, result) {
+            if (err) throw err;
+        });
+
+      //   Customers.find({}).toArray(function(err,result){
+      //       var finalResult = {};
+      //       if(err){
+      //           console.log("Error retrieving records");
+      //           response.send(err);
+      //       } else if (result.length){
+      //           console.log("Success");
+      //           finalResult.plist = result;
+      //           // collection.find({/* another query */}).toArray(function(err,result){
+      //           //     finalResult.anotherKey = result;
+      //               response.render('storeData',{results:finalResult});
+      //           // });
+      //       }else{
+      //           response.send('No Documents');
+      //       }
+      //       db.close();
+      // });
+  });
 };

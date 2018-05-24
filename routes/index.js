@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-mongodb = require('mongodb');
 
 var controllerMongoCollection = require('../controllers/database');
 
@@ -9,14 +8,8 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/storeData', function(req, res) {
-    var finalOrder = req.body.order;
-    res.format({'application/json': function() {
-            res.render('/getAllOrders', controllerMongoCollection.storeData);
-            res.send(finalOrder);
-        },
-    });
-});
+router.post('/storeData', controllerMongoCollection.storeData);
+
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 

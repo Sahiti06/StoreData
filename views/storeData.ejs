@@ -5,11 +5,20 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>Store Data:</h1>
-<div>
+<h1>THANK YOU FOR YOUR SUBMITTED ORDER</h1>
 
-    <%- finalOrder %>
+<ul>
+    <% results.forEach(function(r) { %>
+    <li><%=r.CID%></li>
+    <li><%=r.FIRSTNAME%></li>
+    <li><%=r.LASTNAME%></li>
+    <li><%=r.STREET%></li>
+    <li><%=r.CITY%></li>
+    <li><%=r.STATE%></li>
+    <br/> <br/>
+    <% }); %>
+</ul>
 
-</div>
+
 </body>
 </html>
