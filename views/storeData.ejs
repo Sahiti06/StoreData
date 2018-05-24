@@ -5,17 +5,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1><%= title %></h1>
+<h1>Store Data:</h1>
 
 <table class="table table-inverse">
 
     <tbody>
-    <% for(var i=0; i < finalOrder.length; i++) { %>
+    <% for(var i=0; i < displayResults.length; i++) { %>
     <tr>
 
-        <td><%= finalOrder[i].address1 %></td>
-        <td><%= finalOrder[i].cardnumber %></td>
-        <td><%= finalOrder[i].firstname %></td>
+        <td><%= displayResults[i].address1 %></td>
+        <td><%= displayResults[i].cardnumber %></td>
+        <td><%= displayResults[i].firstname %></td>
 
     </tr>
     <% } %>
