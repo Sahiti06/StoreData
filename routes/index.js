@@ -16,7 +16,7 @@ res.send("Order succesfully received: " + value_name);
 
 router.get('/storeData', function(req, res) {
     var finalOrder = req.body.order;
-    res.render('storeData', {finalOrder : finalOrder});
+    res.render('storeData', { title: 'Getting Orders Collection' }, {finalOrder : finalOrder});
 });
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
