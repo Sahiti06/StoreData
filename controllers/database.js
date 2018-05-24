@@ -35,19 +35,13 @@ module.exports.getAllOrders =  function (request, response) {
         //   this request and loop  is to display content in the  console log
         var c = Orders.find({});
 
-        c.forEach(
-            function(myDoc) {
-                console.log( "name: " + myDoc.name );  //just logging the output to the console
-            }
-        );
-
 
         //SECOND -show another way to make request for ALL Orders and simply collect the  documents as an
         //   array called docs that you  forward to the  getAllorders.ejs view for use there
         Orders.find().toArray(function (err, docs) {
             if(err) throw err;
 
-            response.render('getAllOrders', {results: docs});
+            // response.render('getAllOrders', {results: docs});
 
         });
 
@@ -62,12 +56,10 @@ module.exports.storeData = function (request, response) {
 
     const { parse } = require('querystring');
     if (request.method === 'POST') {
+        // response.setHeader('Content-Type: application/json');
         var finalOrder = request.body.order;
         response.send(finalOrder);
     }
-
-     var print = JSON.parse(finalOrder);
-     console.log(print);
 
     mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
         if(err) throw err;
@@ -112,24 +104,27 @@ module.exports.storeData = function (request, response) {
         };
 
         var orders = {
+               order_CID: customerdata.CID,
+               order_SID: shippingdata.SID,
+               order_BID: billingdata.BID,
                PRODUCT_VECTOR: JSON.parse(finalOrder)['productdetails']
         };
 
         Customers.insertOne(customerdata, function (err, result) {
             if (err) throw err;
         });
-
-        Billing.insertOne(billingdata, function (err, result) {
-            if (err) throw err;
-        });
-
-        Shipping.insertOne(shippingdata, function (err, result) {
-            if (err) throw err;
-        });
-
-        Orders.insertOne(orders, function (err, result) {
-            if (err) throw err;
-        });
+        //
+        // Billing.insertOne(billingdata, function (err, result) {
+        //     if (err) throw err;
+        // });
+        //
+        // Shipping.insertOne(shippingdata, function (err, result) {
+        //     if (err) throw err;
+        // });
+        //
+        // Orders.insertOne(orders, function (err, result) {
+        //     if (err) throw err;
+        // });
 
       //   Customers.find({}).toArray(function(err,result){
       //       var finalResult = {};
@@ -139,14 +134,25 @@ module.exports.storeData = function (request, response) {
       //       } else if (result.length){
       //           console.log("Success");
       //           finalResult.plist = result;
-      //           // collection.find({/* another query */}).toArray(function(err,result){
-      //           //     finalResult.anotherKey = result;
-      //               response.render('storeData',{results:finalResult});
-      //           // });
+      // //           // collection.find({/* another query */}).toArray(function(err,result){
+      // //           //     finalResult.anotherKey = result;
+      //                 response.render('storeData',{results:finalResult});
+      //             // });
       //       }else{
       //           response.send('No Documents');
       //       }
-      //       db.close();
+      //       client.close();
       // });
+
+        Customers.find().toArray(function (err, docs) {
+            if(err) throw err;
+
+            response.end('/storeData', {results: docs});
+        });
+
+        //close connection when your app is terminating.
+        client.close(function (err) {
+            if(err) throw err;
+        });
   });
 };

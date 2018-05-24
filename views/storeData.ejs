@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
+    <title>mLab MongoDB results</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>THANK YOU FOR YOUR SUBMITTED ORDER</h1>
-
-<ul>
-    <% results.forEach(function(r) { %>
-    <li><%=r.CID%></li>
-    <li><%=r.FIRSTNAME%></li>
-    <li><%=r.LASTNAME%></li>
-    <li><%=r.STREET%></li>
-    <li><%=r.CITY%></li>
-    <li><%=r.STATE%></li>
-    <br/> <br/>
-    <% }); %>
-</ul>
-
-
+<h1>Getting order details from MongoDB</h1>
+<h3>Order Successful</h3>
 </body>
 </html>

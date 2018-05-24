@@ -10,6 +10,9 @@ router.get('/', function(req, res) {
 
 router.post('/storeData', controllerMongoCollection.storeData);
 
+router.get('/storeData', function(req, res) {
+    res.render('storeData', { title: 'Results from DB' });
+});
 
 router.get('/getAllOrders', controllerMongoCollection.getAllOrders);
 
