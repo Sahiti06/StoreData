@@ -3,9 +3,20 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type='text/javascript'>
+
+        var displayFinalOrder = JSON.stringify(finalOrder, function(key, value) {
+            if (typeof value === 'function') {
+                return value.toString();
+            } else {
+                return value;
+            }
+        });
+
+    </script>
 </head>
 <body>
 <h1><%= title %></h1>
-<h3><%= 'finalOrder' %></h3>
+<h3><%= displayFinalOrder %></h3>
 </body>
 </html>

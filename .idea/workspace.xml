@@ -20,8 +20,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="18" column="85" selection-start-line="18" selection-start-column="85" selection-end-line="18" selection-end-column="85" />
+            <state relative-caret-position="227">
+              <caret line="18" column="83" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -38,8 +38,8 @@
       <file leaf-file-name="storeData.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/storeData.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+            <state relative-caret-position="105">
+              <caret line="7" column="57" selection-start-line="7" selection-start-column="57" selection-end-line="7" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -167,12 +167,12 @@
       <updated>1527039309997</updated>
       <workItem from="1527039313157" duration="12328000" />
       <workItem from="1527063133281" duration="2691000" />
-      <workItem from="1527101544816" duration="5457000" />
+      <workItem from="1527101544816" duration="6068000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20476000" />
+    <option name="totallyTimeSpent" value="21087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="6" />
@@ -301,15 +301,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="18" column="85" selection-start-line="18" selection-start-column="85" selection-end-line="18" selection-end-column="85" />
+        <state relative-caret-position="227">
+          <caret line="18" column="83" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="83" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/storeData.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        <state relative-caret-position="105">
+          <caret line="7" column="57" selection-start-line="7" selection-start-column="57" selection-end-line="7" selection-end-column="57" />
         </state>
       </provider>
     </entry>
