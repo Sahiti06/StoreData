@@ -8,6 +8,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Express' });
 });
 
+/* POST storeData */
 router.post('/storeData', controllerMongoCollection.storeData);
 
 router.get('/storeData', function(req, res) {

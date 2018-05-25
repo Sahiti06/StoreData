@@ -41,7 +41,7 @@ module.exports.getAllOrders =  function (request, response) {
         Orders.find().toArray(function (err, docs) {
             if(err) throw err;
 
-            // response.render('getAllOrders', {results: docs});
+            response.render('getAllOrders', {results: docs});
 
         });
 
@@ -66,11 +66,13 @@ module.exports.storeData = function (request, response) {
         const Shipping = db.collection('SHIPPING');
         const Orders = db.collection('ORDERS');
 
+        //random function to generate IDs
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
 
 
+        //variable for customer info
         var customerdata = {
             CID: customerID,
             FIRSTNAME: request.body.firstname,
@@ -81,6 +83,7 @@ module.exports.storeData = function (request, response) {
             EMAIL: request.body.email
          };
 
+        //variable for shipping info
         var shippingdata = {
             SID: shippingID,
             STREET: request.body.address1 + ' ' + request.body.address2,
@@ -88,6 +91,7 @@ module.exports.storeData = function (request, response) {
             STATE: request.body.state
         };
 
+       //variable for billing info
         var billingdata = {
             BID: billingID,
             CREDITCARDTYPE: request.body.cardtype,
@@ -97,6 +101,7 @@ module.exports.storeData = function (request, response) {
             CREDITCARDSECURITYNUM: request.body.cardcvv
         };
 
+       //variable for order info
         var orders = {
                order_CID: customerdata.CID,
                order_SID: shippingdata.SID,
@@ -104,6 +109,8 @@ module.exports.storeData = function (request, response) {
                DATE: Date.now(),
                PRODUCT_VECTOR: request.body['productdetails']
         };
+
+        //functions to do the insert operations into various collections
 
         Customers.insertOne(customerdata, function (err, result) {
             if (err) throw err;
@@ -121,15 +128,16 @@ module.exports.storeData = function (request, response) {
             if (err) throw err;
         });
 
-        // db.query(Customers.find(), function(err, result1) {
-        //     db.query(Shipping.find(), function(err, result2) {
-        //         db.query(Billing.find(), function(err, result3) {
-        //             db.query(Orders.find(), function(err, result4) {
-        //           response.render('storeData', { rows1 : result1, rows2: result2, rows3: result3, rows4: result4 });
-        //         });
-        //       });
-        //     });
-        // });
+        //nested queries to get the data from each and every collection
+        db.query(Customers.find(), function(err, result1) {
+            db.query(Shipping.find(), function(err, result2) {
+                db.query(Billing.find(), function(err, result3) {
+                    db.query(Orders.find(), function(err, result4) {
+                  response.render('storeData', { rows1 : result1, rows2: result2, rows3: result3, rows4: result4 });
+                });
+              });
+            });
+        });
 
         //close connection when your app is terminating.
         client.close(function (err) {
