@@ -1,5 +1,5 @@
-var mongodb = require('mongodb');
-var mongoDBURI = process.env.MONGODB_URI || 'mongodb://sahiti:test123@ds225010.mlab.com:25010/heroku_w1zxv8n0';
+const mongodb = require('mongodb');
+const mongoDBURI = process.env.MONGODB_URI || 'mongodb://sahiti:test123@ds225010.mlab.com:25010/heroku_w1zxv8n0';
 
 // var myModule = require('./modules');
 
@@ -54,101 +54,82 @@ module.exports.getAllOrders =  function (request, response) {
 
 module.exports.storeData = function (request, response) {
 
-    const { parse } = require('querystring');
-    if (request.method === 'POST') {
-        // response.setHeader('Content-Type: application/json');
-        var finalOrder = request.body.order;
-        response.send(finalOrder);
-    }
-
     mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
         if(err) throw err;
 
-        //get handle to the databse
-        var theDatabase = client.db('heroku_w1zxv8n0');
+        //get handle to the database
+        const db = client.db('heroku_w1zxv8n0');
 
         //get collection of Orders
-        var Customers = theDatabase.collection('CUSTOMERS');
-        var Billing = theDatabase.collection('BILLING');
-        var Shipping = theDatabase.collection('SHIPPING');
-        var Orders = theDatabase.collection('ORDERS');
+        const Customers = db.collection('CUSTOMERS');
+        const Billing = db.collection('BILLING');
+        const Shipping = db.collection('SHIPPING');
+        const Orders = db.collection('ORDERS');
 
         var customerID = Math.floor((Math.random() * 1000000000000) + 1);
         var billingID = Math.floor((Math.random() * 1000000000000) + 1);
         var shippingID = Math.floor((Math.random() * 1000000000000) + 1);
 
+
         var customerdata = {
             CID: customerID,
-            FIRSTNAME: JSON.parse(finalOrder).firstname,
-            LASTNAME: JSON.parse(finalOrder).lastname,
-            STREET: JSON.parse(finalOrder).address1 + ' ' + JSON.parse(finalOrder).address2,
-            CITY: JSON.parse(finalOrder).city,
-            STATE: JSON.parse(finalOrder).state,
-            EMAIL: JSON.parse(finalOrder).email
+            FIRSTNAME: request.body.firstname,
+            LASTNAME: request.body.lastname,
+            STREET: request.body.address1 + ' ' + request.body.address2,
+            CITY: request.body.city,
+            STATE: request.body.state,
+            EMAIL: request.body.email
          };
 
         var shippingdata = {
             SID: shippingID,
-            STREET: JSON.parse(finalOrder).address1 + ' ' + JSON.parse(finalOrder).address2,
-            CITY: JSON.parse(finalOrder).city,
-            STATE: JSON.parse(finalOrder).state
+            STREET: request.body.address1 + ' ' + request.body.address2,
+            CITY: request.body.city,
+            STATE: request.body.state
         };
 
         var billingdata = {
             BID: billingID,
-            CREDITCARDTYPE: JSON.parse(finalOrder).cardtype,
-            CREDITCARDNUM: JSON.parse(finalOrder).cardnumber,
-            CREDITCARDEXP: JSON.parse(finalOrder).cardexpmonth,
-            CREDITCARDYR: JSON.parse(finalOrder).cardexpyear,
-            CREDITCARDSECURITYNUM: JSON.parse(finalOrder).cardcvv
+            CREDITCARDTYPE: request.body.cardtype,
+            CREDITCARDNUM: request.body.cardnumber,
+            CREDITCARDEXP: request.body.cardexpmonth,
+            CREDITCARDYR: request.body.cardexpyear,
+            CREDITCARDSECURITYNUM: request.body.cardcvv
         };
 
         var orders = {
                order_CID: customerdata.CID,
                order_SID: shippingdata.SID,
                order_BID: billingdata.BID,
-               PRODUCT_VECTOR: JSON.parse(finalOrder)['productdetails']
+               DATE: Date.now(),
+               PRODUCT_VECTOR: request.body['productdetails']
         };
 
         Customers.insertOne(customerdata, function (err, result) {
             if (err) throw err;
         });
-        //
-        // Billing.insertOne(billingdata, function (err, result) {
-        //     if (err) throw err;
-        // });
-        //
-        // Shipping.insertOne(shippingdata, function (err, result) {
-        //     if (err) throw err;
-        // });
-        //
-        // Orders.insertOne(orders, function (err, result) {
-        //     if (err) throw err;
-        // });
 
-      //   Customers.find({}).toArray(function(err,result){
-      //       var finalResult = {};
-      //       if(err){
-      //           console.log("Error retrieving records");
-      //           response.send(err);
-      //       } else if (result.length){
-      //           console.log("Success");
-      //           finalResult.plist = result;
-      // //           // collection.find({/* another query */}).toArray(function(err,result){
-      // //           //     finalResult.anotherKey = result;
-      //                 response.render('storeData',{results:finalResult});
-      //             // });
-      //       }else{
-      //           response.send('No Documents');
-      //       }
-      //       client.close();
-      // });
-
-        Customers.find().toArray(function (err, docs) {
-            if(err) throw err;
-
-            response.end('/storeData', {results: docs});
+        Billing.insertOne(billingdata, function (err, result) {
+            if (err) throw err;
         });
+
+        Shipping.insertOne(shippingdata, function (err, result) {
+            if (err) throw err;
+        });
+
+        Orders.insertOne(orders, function (err, result) {
+            if (err) throw err;
+        });
+
+        // db.query(Customers.find(), function(err, result1) {
+        //     db.query(Shipping.find(), function(err, result2) {
+        //         db.query(Billing.find(), function(err, result3) {
+        //             db.query(Orders.find(), function(err, result4) {
+        //           response.render('storeData', { rows1 : result1, rows2: result2, rows3: result3, rows4: result4 });
+        //         });
+        //       });
+        //     });
+        // });
 
         //close connection when your app is terminating.
         client.close(function (err) {
