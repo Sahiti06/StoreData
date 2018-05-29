@@ -54,8 +54,8 @@ module.exports.getAllOrders =  function (request, response) {
 
 module.exports.storeData = function (request, response) {
 
-    // var results = request.body;
-    // response.send(results);
+    var results = request.body;
+    response.send(results);
 
     mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
         if(err) throw err;
