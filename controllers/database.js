@@ -54,6 +54,9 @@ module.exports.getAllOrders =  function (request, response) {
 
 module.exports.storeData = function (request, response) {
 
+    // var results = request.body;
+    // response.send(results);
+
     mongodb.MongoClient.connect(mongoDBURI, function(err,  client) {
         if(err) throw err;
 
@@ -129,15 +132,15 @@ module.exports.storeData = function (request, response) {
         });
 
         //nested queries to get the data from each and every collection
-        db.query(Customers.find(), function(err, result1) {
-            db.query(Shipping.find(), function(err, result2) {
-                db.query(Billing.find(), function(err, result3) {
-                    db.query(Orders.find(), function(err, result4) {
-                  response.render('storeData', { rows1 : result1, rows2: result2, rows3: result3, rows4: result4 });
-                });
-              });
-            });
-        });
+        // db.query(Customers.find(), function(err, result1) {
+        //     db.query(Shipping.find(), function(err, result2) {
+        //         db.query(Billing.find(), function(err, result3) {
+        //             db.query(Orders.find(), function(err, result4) {
+        //           response.render('storeData', { rows1 : result1, rows2: result2, rows3: result3, rows4: result4 });
+        //         });
+        //       });
+        //     });
+        // });
 
         //close connection when your app is terminating.
         client.close(function (err) {
