@@ -78,12 +78,12 @@ module.exports.storeData = function (request, response) {
         //variable for customer info
         var customerdata = {
             CID: customerID,
-            FIRSTNAME: request.body.firstname,
-            LASTNAME: request.body.lastname,
-            STREET: request.body.address1 + ' ' + request.body.address2,
-            CITY: request.body.city,
-            STATE: request.body.state,
-            EMAIL: request.body.email
+            FIRSTNAME: JSON.parse(results.firstname),
+            LASTNAME: JSON.parse(results.lastname),
+            STREET: JSON.parse(results.address1) + ' ' + JSON.parse(results.address2),
+            CITY: JSON.parse(results.city),
+            STATE: JSON.parse(results.state),
+            EMAIL: JSON.parse(results.email)
          };
 
         //variable for shipping info
